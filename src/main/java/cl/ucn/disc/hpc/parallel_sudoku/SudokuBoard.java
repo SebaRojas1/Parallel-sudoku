@@ -111,22 +111,6 @@ public class SudokuBoard {
     }
 
     /**
-     * Method used to check if the board is full
-     * @return True if the board is full, false in other cases
-     */
-    public boolean checkFullBoard() {
-
-        for (int i = 0; i < N; i++) {
-            for (int p = 0; p < N; p++) {
-                if (board[i][p] == 0) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    /**
      * Get the board used to be solved
      * @return The board
      */
@@ -150,7 +134,6 @@ public class SudokuBoard {
      */
     public void printBoard(){
         System.out.println("");
-        log.info("Solved sudoku board");
         for(int i = 0; i < N; i++) {
             for (int p = 0; p < N; p++) {
                 System.out.print(board[i][p]);

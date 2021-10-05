@@ -90,7 +90,8 @@ public final class Main {
             sw.stop();
             //Solved board print
             board.printBoard();
-            log.info("The sudoku was solved with {} threads in a time of {} μs \n \n", cantThreads, sw.getTime(TimeUnit.MICROSECONDS));
+            log.info("The sudoku was solved with {} threads in a time of {} μs \n \n", cantThreads,
+                    sw.getTime(TimeUnit.MICROSECONDS));
             return true;
         }
         else{

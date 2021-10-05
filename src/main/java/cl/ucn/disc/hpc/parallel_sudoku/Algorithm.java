@@ -33,6 +33,7 @@ public class Algorithm {
      * @return True if it is complete, false if a move is invalid
      */
     public boolean solve(SudokuBoard board){
+
         for (int row = 0; row < board.getN(); row++) {
             for (int col = 0; col < board.getN(); col++) {
                 //Check if the grid is empty
