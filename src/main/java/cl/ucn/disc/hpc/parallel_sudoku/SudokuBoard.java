@@ -43,6 +43,12 @@ public class SudokuBoard {
         this.N = N;
     }
 
+    /**
+     * Method used to check if the number is already in the row
+     * @param row Number of the row
+     * @param number Number to check
+     * @return True if the number is found in the row, false in other cases
+     */
     public boolean checkRow(int row, int number) {
         for (int i = 0; i < N; i++) {
             if (board[row][i] == number) {
@@ -52,6 +58,12 @@ public class SudokuBoard {
         return false;
     }
 
+    /**
+     * Method used to check if the number is already in the column
+     * @param col Number of the column
+     * @param number Number to check
+     * @return True if the number is found in the column, false in other cases
+     */
     public boolean checkCol(int col, int number) {
         for (int i = 0; i < N; i++) {
             if (board[i][col] == number) {
@@ -61,8 +73,17 @@ public class SudokuBoard {
         return false;
     }
 
+    /**
+     * Method used to check if the number is already in the box
+     * @param row Number of the row
+     * @param col Number of the column
+     * @param number Number to check
+     * @return True if the number is in the box, false in other cases
+     */
     public boolean checkBox(int row, int col, int number) {
+        //The first row of the box is obtained
         int boxRow = row - row % 3;
+        //The first column of the box is obtained
         int boxCol = col - col % 3;
 
         for (int i = boxRow; i < boxRow + 3; i++) {
@@ -75,6 +96,13 @@ public class SudokuBoard {
         return false;
     }
 
+    /**
+     * Method used to check that the movement you are trying to make is valid
+     * @param row Number of the row
+     * @param col Number of the column
+     * @param number Number to check
+     * @return True if the movement is valid, false if the movement is not valid
+     */
     public boolean checkMovement(int row, int col, int number) {
         if(checkRow(row, number) || checkCol(col, number) || checkBox(row, col, number)){
             return false;
@@ -82,6 +110,10 @@ public class SudokuBoard {
         return true;
     }
 
+    /**
+     * Method used to check if the board is full
+     * @return True if the board is full, false in other cases
+     */
     public boolean checkFullBoard() {
 
         for (int i = 0; i < N; i++) {
@@ -94,10 +126,17 @@ public class SudokuBoard {
         return true;
     }
 
+    /**
+     * Get the board used to be solved
+     * @return The board
+     */
     public int[][] getBoard() {
         return this.board;
     }
 
+    /**
+     * Method used to restore the initial values of the board
+     */
     public void  setInitialValues() {
         for(int i = 0; i < N; i++){
             for(int p = 0; p < N; p++){
@@ -106,6 +145,9 @@ public class SudokuBoard {
         }
     }
 
+    /**
+     * Method used to print the board
+     */
     public void printBoard(){
         System.out.println("");
         log.info("Solved sudoku board");
@@ -123,10 +165,20 @@ public class SudokuBoard {
         }
     }
 
+    /**
+     * Method used to place a number on a grid
+     * @param row Number of the row
+     * @param col Number of the column
+     * @param number Number to check
+     */
     public void setNumberByPos(int row, int col, int number) {
         this.board[row][col] = number;
     }
 
+    /**
+     * Get the size
+     * @return The size
+     */
     public int getN() {
         return this.N;
     }
