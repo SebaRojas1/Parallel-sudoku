@@ -21,32 +21,32 @@ package cl.ucn.disc.hpc.parallel_sudoku;
  */
 public class Algorithm {
 
-    //The sudoku board
-    private SudokuBoard board;
-
     /**
      * Constructor
-     * @param board The board to be used
      */
-    public Algorithm(SudokuBoard board) {
-        this.board = board;
+    public Algorithm() {
+
     }
 
     /**
      * The method used to solve the sudoku puzzle in parallel
-     * @return
+     * @return True if it is complete, false if a move is invalid
      */
-    public boolean solve(){
+    public boolean solve(SudokuBoard board){
         for (int row = 0; row < board.getN(); row++) {
             for (int col = 0; col < board.getN(); col++) {
+                //Check if the grid is empty
                 if(board.getBoard()[row][col] == 0) {
                     for(int number = 1; number < 10; number++) {
+                        //Check what number is possible to place in that grid
                         if(board.checkMovement(row, col, number)) {
+                            //Put a number greater than 0 on the grid
                             board.setNumberByPos(row, col, number);
-                            if(solve()) {
+                            if(solve(board)) {
                                 return true;
                             }
                             else {
+                                //Put a 0 on the grid
                                 board.setNumberByPos(row, col, 0);
                             }
                         }

@@ -34,7 +34,7 @@ public class SudokuBoard {
     private final int N;
 
     /**
-     * Constructor of the board class
+     * Constructor
      * @param board The input sudoku board
      */
     public SudokuBoard(int[][] board, int[][] initialBoard, int N) {

@@ -18,9 +18,14 @@ package cl.ucn.disc.hpc.parallel_sudoku;
 
 import java.io.*;
 
+/**
+ * Board reader class
+ */
 public class BoardReader {
 
-
+    /**
+     * Constructor
+     */
     public BoardReader() {
 
     }
@@ -30,19 +35,32 @@ public class BoardReader {
      * @return true if the file information is correct, false in other cases
      */
     public SudokuBoard readEntryBoard() throws IOException {
+        //Read the file containing the board
         FileReader fReader = new FileReader("entry_board.txt");
+        //Read a line from the received file
         BufferedReader bReader = new BufferedReader(fReader);
+        //The size of the board
         int N = Integer.parseInt(bReader.readLine());
+        //The NxN board
         int[][] sudokuBoard = new int[N][N];
+        //The initial board
         int[][] initialSudokuBoard = new int[N][N];
+
         for(int i = 0; i < N; i++) {
+            //Receive line
             String line = bReader.readLine();
+            //Separate the numbers obtained
             String[] rowNumbers = line.split(" ");
+
+            //Iteration to fill the board
             for(int p = 0; p < N; p++) {
+                //Add a value to the board
                 sudokuBoard[i][p] = Integer.parseInt(rowNumbers[p]);
+                //Add a value to the initial board
                 initialSudokuBoard[i][p] = Integer.parseInt(rowNumbers[p]);
             }
         }
+        //Instantiate a sudoku board to return it
         SudokuBoard newBoard = new SudokuBoard(sudokuBoard, initialSudokuBoard, N);
         return newBoard;
     }

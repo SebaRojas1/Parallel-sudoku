@@ -66,18 +66,29 @@ public final class Main {
 
         log.info("Starting to solve with {} threads...", cantThreads);
 
+        //Unresolved board print
         board.printBoard();
 
+        //Solve runtime begins
         final StopWatch sw = StopWatch.createStarted();
 
+        //The executor begins the tasks
         executor.submit(() -> {
-            Algorithm solver = new Algorithm(board);
-            solver.solve();
+            //Algorithm class instance
+            Algorithm solver = new Algorithm();
+            //Run solve
+            solver.solve(board);
         });
+
+        //Waiting for the executor
         executor.shutdown();
+
+        //Maximum waiting time to be solved (minutes)
         int maxTime = 3;
         if(executor.awaitTermination(maxTime, TimeUnit.MINUTES)){
+            //Time stops
             sw.stop();
+            //Solved board print
             board.printBoard();
             log.info("The sudoku was solved with {} threads in a time of {} μs \n \n", cantThreads, sw.getTime(TimeUnit.MICROSECONDS));
             return true;
