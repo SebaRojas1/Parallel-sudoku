@@ -26,7 +26,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- * The main class
+ * The main class of the project
  */
 @Slf4j
 public final class Main {
@@ -34,13 +34,20 @@ public final class Main {
     private static final int maxCores = Runtime.getRuntime().availableProcessors();
     /**
      * The main method of the class, this is where the application will run
-     * @param args
+     * @param args to use
      */
     public static void main(String[] args) throws IOException, InterruptedException {
+        //Class instance to read the board
         BoardReader file = new BoardReader();
+        //Instance of the board class to have the board
         SudokuBoard board = file.readEntryBoard();
+
+        //Iteration where the sudoku is solved with different amounts of threads
         for (int i = 1; i <= maxCores; i++) {
+
+            //Board values reset, so it can be resolved again after running once
             board.setInitialValues();
+            //Method to solve the sudoku
             solveSudoku(i, board);
         }
     }
@@ -50,23 +57,29 @@ public final class Main {
      * @param cantThreads Number of threads used
      * @param board The sudoku board used to be solved
      * @return True if a solution was found, false in other cases
+     * @throws InterruptedException Task interruption
      */
     public static boolean solveSudoku(final int cantThreads, SudokuBoard board) throws InterruptedException {
 
         // The Executor of Threads
         final ExecutorService executor = Executors.newFixedThreadPool(cantThreads);
 
+        log.info("Starting to solve with {} threads...", cantThreads);
+
+        board.printBoard();
+
         final StopWatch sw = StopWatch.createStarted();
 
         executor.submit(() -> {
-            ParallelSolution solver = new ParallelSolution(board);
+            Algorithm solver = new Algorithm(board);
             solver.solve();
         });
         executor.shutdown();
         int maxTime = 3;
         if(executor.awaitTermination(maxTime, TimeUnit.MINUTES)){
             sw.stop();
-            log.info("The sudoku was solved with {} threads in a time of {}", cantThreads, sw.getTime(TimeUnit.MICROSECONDS));
+            board.printBoard();
+            log.info("The sudoku was solved with {} threads in a time of {} μs \n \n", cantThreads, sw.getTime(TimeUnit.MICROSECONDS));
             return true;
         }
         else{

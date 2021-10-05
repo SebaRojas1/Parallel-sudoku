@@ -16,11 +16,14 @@
  */
 package cl.ucn.disc.hpc.parallel_sudoku;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.File;
 
 /**
  * Board object class
  */
+@Slf4j
 public class SudokuBoard {
 
     //Sudoku board NxN
@@ -99,6 +102,23 @@ public class SudokuBoard {
         for(int i = 0; i < N; i++){
             for(int p = 0; p < N; p++){
                 board[i][p] = initialBoard[i][p];
+            }
+        }
+    }
+
+    public void printBoard(){
+        System.out.println("");
+        log.info("Solved sudoku board");
+        for(int i = 0; i < N; i++) {
+            for (int p = 0; p < N; p++) {
+                System.out.print(board[i][p]);
+                if((p+1)%3 == 0 && p!=0) {
+                    System.out.print("     ");
+                }
+            }
+            System.out.println(" ");
+            if((i+1)%3 == 0) {
+                System.out.println(" ");
             }
         }
     }

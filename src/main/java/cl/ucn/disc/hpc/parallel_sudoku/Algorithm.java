@@ -19,7 +19,7 @@ package cl.ucn.disc.hpc.parallel_sudoku;
 /**
  * The class of the sudoku solution in parallel
  */
-public class ParallelSolution {
+public class Algorithm {
 
     //The sudoku board
     private SudokuBoard board;
@@ -28,7 +28,7 @@ public class ParallelSolution {
      * Constructor
      * @param board The board to be used
      */
-    public ParallelSolution(SudokuBoard board) {
+    public Algorithm(SudokuBoard board) {
         this.board = board;
     }
 
@@ -55,16 +55,7 @@ public class ParallelSolution {
                 }
             }
         }
-        for(int i = 0; i < board.getN(); i++) {
-            for (int p = 0; p < board.getN(); p++) {
-                System.out.print(board.getBoard()[i][p]);
-            }
-            System.out.println(" ");
-        }
         return true;
     }
 
-    public SudokuBoard getBoard(){
-        return this.board;
-    }
 }
