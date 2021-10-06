@@ -62,7 +62,7 @@ public class SudokuBoard {
      * Method used to check if the number is already in the column
      * @param col Number of the column
      * @param number Number to check
-     * @return True if the number is found in the column, false in other cases
+     * @return True if the number is found in the column, false in other cases.
      */
     public boolean checkCol(int col, int number) {
         for (int i = 0; i < N; i++) {
